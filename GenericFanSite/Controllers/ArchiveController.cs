@@ -2,7 +2,7 @@
 
 namespace GenericFanSite.Controllers
 {
-    public class AboutController : Controller
+    public class ArchiveController : Controller
     {
         public IActionResult Index()
         {

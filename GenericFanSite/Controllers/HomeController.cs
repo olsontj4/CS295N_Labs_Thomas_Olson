@@ -18,6 +18,15 @@ namespace GenericFanSite.Controllers
             return View();
         }
 
+        public IActionResult History()
+        {
+            return View();
+        }
+        public IActionResult Stories()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
