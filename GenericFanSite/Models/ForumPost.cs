@@ -13,5 +13,11 @@
     Name of the submitter (AppUser)
 
     Date submitted*/
+        public string ForumTitle { get; set; }
+        public string ForumDescription { get; set; }
+        public int ForumYear { get; set;}
+        public string ForumText { get; set; }
+        public string ForumUser { get; set; }
+        public DateTime ForumDate { get; set; }
     }
 }
