@@ -97,8 +97,18 @@
             }
             set
             {
-                if (value.Trim().Length <=0)
-                forumText = value.Trim();
+                if (value.Trim().Length <= 0)
+                {
+                    throw new ArgumentOutOfRangeException("Please enter text.");
+                }
+                else if (value.Trim().Length > 10000)
+                {
+                    throw new ArgumentOutOfRangeException("Character limit is 10000.");
+                }
+                else
+                {
+                    forumText = value.Trim();
+                }
             }
         }
         public string ForumUser
