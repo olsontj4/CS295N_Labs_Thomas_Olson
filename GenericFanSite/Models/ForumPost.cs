@@ -13,7 +13,13 @@
     Name of the submitter (AppUser)
 
     Date submitted*/
-        public ForumPost(string forumTitle, string forumDescription, int forumYear, string forumText, string forumUser, DateTime forumDate)
+        public string ForumTitle { get; set; }
+        public string ForumDescription { get; set;}
+        public int ForumYear { get; set;}
+        public string ForumText { get; set;}
+        public AppUser ForumUser { get; set;}
+        public DateTime ForumDate { get; set;}
+        /*public ForumPost(string forumTitle, string forumDescription, int forumYear, string forumText, string forumUser, DateTime forumDate)
         {
             ForumTitle = forumTitle;
             ForumDescription = forumDescription;
@@ -132,7 +138,7 @@
             {
                 forumDate = DateTime.Now;
             }
-        }
+        }*/
         //TODO: Validate setters.
     }
 }
