@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Top Stories";
+}
+@model ForumPost
+<br />
+<article class="text-center">
+    <h1>@ViewData["Title"]:</h1>
+</article>
+<article class="text-center">
+</article>
+<hr />
+<article class="text-center">
+    <li>
+        <a asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
+    </li>
+    <br />
+    @if (Model.ForumTitle != null)
+    {
+        <figure>
+            <h3>@Model.ForumTitle</h3>
+            <p>@Model.ForumDescription</p>
+            <p>@Model.ForumText</p>
+            <p>@Model.ForumYear</p>
+            <p>@Model.ForumUser.Name</p>
+            <p>@Model.ForumDate.Date</p>
+        </figure>
+    }
+    else
+    {
+        <p class="text-danger">There are no forum posts.</p>
+    }
+    <!--div class="spinner-border" role="status">
+        <span class="visually-hidden"></span>
+    </div-->
+</article>
