@@ -6,32 +6,31 @@
 }
 @model ForumPost
 <br />
-<article class="text-center">
+<section class="text-center">
     <h1>@ViewData["Title"]:</h1>
-</article>
-<article class="text-center">
-</article>
+</section>
 <hr />
 <article class="text-center">
-    <li>
-        <a asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
-    </li>
-    <br />
-    @if (Model.ForumTitle != null)
-    {
-        <figure>
-            <h3>@Model.ForumTitle</h3>
-            <p>@Model.ForumDescription</p>
-            <p>@Model.ForumText</p>
-            <p>@Model.ForumYear</p>
-            <p>@Model.ForumUser.Name</p>
-            <p>@Model.ForumDate.Date</p>
+    <a class="btn btn-outline-light" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
+</article>
+<article class="text-center row">
+    <div class="mt-lg-3">
+        <figure class="">
+            @if (Model.ForumTitle != null)
+            {
+                <h3>@Model.ForumTitle</h3>
+                <p>@Model.ForumDescription</p>
+                <p>@Model.ForumText</p>
+                <p>@Model.ForumYear</p>
+                <p>@Model.ForumUser.Name</p>
+                <p>@Model.ForumDate.Date</p>
+            }
+            else
+            {
+                <p class="text-danger">There are no forum posts.</p>
+            }
         </figure>
-    }
-    else
-    {
-        <p class="text-danger">There are no forum posts.</p>
-    }
+    </div>
     <!--div class="spinner-border" role="status">
         <span class="visually-hidden"></span>
     </div-->

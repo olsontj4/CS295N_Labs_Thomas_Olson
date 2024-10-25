@@ -16,27 +16,27 @@
 }
 @model ForumPost
 <br />
-<article class="text-center">
+<section class="text-center">
     <h1>@ViewData["Title"]</h1>
-</article>
+</section>
 <hr />
 <article class="d-flex justify-content-center">
-    <form method="post">
-        <h5>Title:</h5>
-        <input type="text" name="ForumTitle" /> 
+    <form class="" method="post">
+        <label class="form-label" for="title">Title:</label>
+        <input class="form-control" id="title" type="text" name="ForumTitle" />
         <br />
-        <h5>Descripton:</h5>
-        <textarea name="ForumDescription"></textarea>
+        <label class="form-label" for="description">Descripton:</label>
+        <textarea class="form-control" id="description" name="ForumDescription"></textarea>
         <br />
-        <h5>Your story:</h5>
-        <textarea name="ForumText"></textarea>
+        <label class="form-label" for="text">Your story:</label>
+        <textarea class="form-control" id="text" name="ForumText"></textarea>
         <br />
-        <h5>Year this story happened:</h5>
-        <input type="number" placeholder="2010" name="ForumYear" />
+        <label class="form-label" for="year">Year this story happened:</label>
+        <input class="form-control" id="year" type="number" placeholder="2010" name="ForumYear" />
         <br />
-        <h5>Name:</h5>
-        <input type="text" name="ForumUser.Name" />
+        <label class="form-label" for="name">Name:</label>
+        <input class="form-control" id="name" type="text" name="ForumUser.Name" />
         <p class="text-danger">Text if something goes wrong.</p>
-        <button type="submit">Submit</button>
+        <button class="btn btn-outline-light" type="submit">Submit</button>
     </form>
 </article>
