@@ -13,23 +13,24 @@
 <article class="text-center">
     <a class="btn btn-outline-light" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
 </article>
-<article class="text-center row">
-    <div class="mt-lg-3">
-        <figure class="">
+<article class="container-fluid mt-3">
+    <div class="mt-lg-3 text-center row d-flex justify-content-center">
             @if (Model.ForumTitle != null)
             {
-                <h3>@Model.ForumTitle</h3>
-                <p>@Model.ForumDescription</p>
-                <p>@Model.ForumText</p>
-                <p>@Model.ForumYear</p>
-                <p>@Model.ForumUser.Name</p>
-                <p>@Model.ForumDate.Date</p>
+                <div class="bg-dark-subtle col col-lg-8">
+                    <h3>@Model.ForumTitle</h3>
+                    <p>@Model.ForumDescription</p>
+                    <p>Year this story took place: @Model.ForumYear</p>
+                    <hr />
+                    <p>@Model.ForumText</p>
+                    <hr />
+                <p class="text-start float-start">Author: @Model.ForumUser.Name</p><p class="text-sm-start text-end float-start float-sm-end">&nbsp;Posted on: @Model.ForumDate.Date.ToShortDateString()</p>
+                </div>
             }
             else
             {
                 <p class="text-danger">There are no forum posts.</p>
             }
-        </figure>
     </div>
     <!--div class="spinner-border" role="status">
         <span class="visually-hidden"></span>
