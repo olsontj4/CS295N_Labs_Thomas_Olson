@@ -17,14 +17,15 @@
     <div class="mt-lg-3 text-center row d-flex justify-content-center">
             @if (Model.ForumTitle != null)
             {
-                <div class="bg-dark-subtle col col-lg-8">
+                <div class="bg-dark-subtle col col-lg-8"><!--Forum post should only stretch to full width on smaller screens.-->
                     <h3>@Model.ForumTitle</h3>
                     <p>@Model.ForumDescription</p>
                     <p>Year this story took place: @Model.ForumYear</p>
                     <hr />
                     <p>@Model.ForumText</p>
                     <hr />
-                <p class="text-start float-start">Author: @Model.ForumUser.Name</p><p class="text-sm-start text-end float-start float-sm-end">&nbsp;Posted on: @Model.ForumDate.Date.ToShortDateString()</p>
+                <p class="text-start float-start">Author: @Model.ForumUser.Name &nbsp;</p><p class="text-sm-start text-start float-start float-sm-end">Posted on: @Model.ForumDate.Date.ToShortDateString()</p>
+                    <!--Text should float to left and right sides except on small screens.-->
                 </div>
             }
             else
