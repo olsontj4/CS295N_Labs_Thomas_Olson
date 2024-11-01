@@ -6,32 +6,33 @@
 }
 @model ForumPost
 <br />
-<article class="text-center">
+<section class="text-center">
     <h1>@ViewData["Title"]:</h1>
-</article>
-<article class="text-center">
-</article>
+</section>
 <hr />
 <article class="text-center">
-    <li>
-        <a asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
-    </li>
-    <br />
-    @if (Model.ForumTitle != null)
-    {
-        <figure>
-            <h3>@Model.ForumTitle</h3>
-            <p>@Model.ForumDescription</p>
-            <p>@Model.ForumText</p>
-            <p>@Model.ForumYear</p>
-            <p>@Model.ForumUser.Name</p>
-            <p>@Model.ForumDate.Date</p>
-        </figure>
-    }
-    else
-    {
-        <p class="text-danger">There are no forum posts.</p>
-    }
+    <a class="btn btn-outline-light" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
+</article>
+<article class="container-fluid mt-3">
+    <div class="mt-md-3 text-center row d-flex justify-content-center">
+            @if (Model.ForumTitle != null)
+            {
+                <div class="bg-dark-subtle col col-md-8"><!--Forum post should only stretch to full width on smaller screens.-->
+                    <h3>@Model.ForumTitle</h3>
+                    <p>@Model.ForumDescription</p>
+                    <p>Year this story took place: @Model.ForumYear</p>
+                    <hr />
+                    <p>@Model.ForumText</p>
+                    <hr />
+                <p class="text-start float-start">Author: @Model.ForumUser.Name &nbsp;</p><p class="text-sm-start text-start float-start float-sm-end">Posted on: @Model.ForumDate.Date.ToShortDateString()</p>
+                    <!--Text should float to left and right sides except on small screens.-->
+                </div>
+            }
+            else
+            {
+                <p class="text-danger">There are no forum posts.</p>
+            }
+    </div>
     <!--div class="spinner-border" role="status">
         <span class="visually-hidden"></span>
     </div-->
