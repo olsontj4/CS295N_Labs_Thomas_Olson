@@ -1,12 +1,15 @@
-﻿//I'm just putting this here so I can re-use it in a different program.
-//TODO: Don't publish this class.
-
-namespace GenericFanSite.Models
+﻿namespace GenericFanSite.Models
 {
     public class Quiz
     {
         private List<Question> _questions = new List<Question>();
-        public List<Question> Questions {
+        public Quiz()
+        {
+            _questions.Add( new Question() { Q = "What is a fish?", A = "Yummy."});
+            _questions.Add( new Question() { Q = "Why is a fish?", A = "He not know." });
+        }
+        public List<Question> Questions
+        {
             get
             {
                 return _questions;
