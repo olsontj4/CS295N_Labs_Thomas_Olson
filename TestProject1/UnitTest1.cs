@@ -18,17 +18,17 @@ namespace TestProject1
         {
             //Act
             //Assert
-            Assert.True(quiz.checkAnswer(quiz.Questions[0]));
+            Assert.True(quiz.checkAnswer(quiz.Questions[2]));
         }
         [Fact]
         public void checkIncorrectAnswer()
         {
-            Assert.False(quiz.checkAnswer(quiz.Questions[1]));
+            Assert.False(quiz.checkAnswer(quiz.Questions[3]));
         }
         [Fact]
         public void checkNumberQuestions()
         {
-            Assert.Equal(2, quiz.Questions.Count);
+            Assert.Equal(4, quiz.Questions.Count);
         }
     }
 }

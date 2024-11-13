@@ -5,8 +5,8 @@
         private List<Question> _questions = new List<Question>();
         public Quiz()
         {
-            _questions.Add( new Question() { Q = "What is a fish?", A = "Yummy."});
-            _questions.Add( new Question() { Q = "Why is a fish?", A = "He not know." });
+            _questions.Add( new Question() { Q = "What is a fish?", A = "Yummy.", UserA = ""});
+            _questions.Add( new Question() { Q = "Why is a fish?", A = "He not know.", UserA = ""});
         }
         public List<Question> Questions
         {
@@ -19,5 +19,10 @@
         {
             return (q.UserA == q.A);
         }
+        /*public override string ToString()
+        {
+            return base.ToString();
+        }*/
+        //TODO: Figure out how to write to console in unit tests.
     }
 }

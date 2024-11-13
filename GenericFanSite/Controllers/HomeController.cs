@@ -33,26 +33,31 @@ namespace GenericFanSite.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        [HttpGet]
         public IActionResult Quiz()
         {
             Quiz model = new Quiz();
             return View(model);
         }
+
         [HttpPost]
-        public IActionResult Quiz(IEnumerable<string> answers)
+        public IActionResult Quiz(string[] answers)
         {
             Quiz model = new Quiz();
-            for (int i = 0; i < model.Questions.Count; i++)
+            for (int i = 0; i < answers.Length; i++)
             {
-                model.Questions[i].UserA = answers.ToString();
+                if (answers[i] != null)
+                {
+                    model.Questions[i].UserA = answers[i];
+                }
             }
-            // TODO: Use this parameter.
             return View(model);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
