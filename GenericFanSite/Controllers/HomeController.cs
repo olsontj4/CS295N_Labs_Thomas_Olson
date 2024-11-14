@@ -1,6 +1,7 @@
 ﻿using GenericFanSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.Json.Nodes;
 
 namespace GenericFanSite.Controllers
 {
@@ -30,6 +31,27 @@ namespace GenericFanSite.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Quiz()
+        {
+            Quiz model = new Quiz();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Quiz(string[] answers)
+        {
+            Quiz model = new Quiz();
+            for (int i = 0; i < answers.Length; i++)
+            {
+                if (answers[i] != null)
+                {
+                    model.Questions[i].UserA = answers[i];
+                }
+            }
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
