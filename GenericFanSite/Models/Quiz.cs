@@ -15,7 +15,7 @@
                 return _questions;
             }
         }
-        public bool checkAnswer(Question q)
+        public bool CheckAnswer(Question q)
         {
             return (q.UserA == q.A);
         }

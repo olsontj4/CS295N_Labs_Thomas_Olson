@@ -16,9 +16,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
+/*var connectionString = builder.Configuration.GetConnectionString("MySqlConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));*/
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
