@@ -14,19 +14,19 @@ namespace TestProject1
             quiz.Questions.Add(q2);
         }
         [Fact]
-        public void checkCorrectAnswer()
+        public void CheckCorrectAnswer()
         {
             //Act
             //Assert
             Assert.True(quiz.CheckAnswer(quiz.Questions[2]));
         }
         [Fact]
-        public void checkIncorrectAnswer()
+        public void CheckIncorrectAnswer()
         {
             Assert.False(quiz.CheckAnswer(quiz.Questions[3]));
         }
         [Fact]
-        public void checkNumberQuestions()
+        public void CheckNumberQuestions()
         {
             Assert.Equal(4, quiz.Questions.Count);
         }
