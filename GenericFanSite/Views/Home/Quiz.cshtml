@@ -8,7 +8,7 @@
             <input name="answers" value="@Model.Questions[i].UserA" class="form-control" />
             if (Model.Questions[i].UserA != "")
             {
-                if (Model.checkAnswer(Model.Questions[i]))
+                if (Model.CheckAnswer(Model.Questions[i]))
                 {
                     <p class="text-success">Correct!</p>
                     <p>Answer: @Model.Questions[i].A</p>
