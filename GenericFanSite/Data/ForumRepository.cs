@@ -1,12 +1,29 @@
 ﻿using GenericFanSite.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GenericFanSite.Data
 {
-    public class ForumRepository
+    public class ForumRepository : IForumRepository
     {
-        /*public List<ForumPost> GetForumPosts()
+        private ApplicationDbContext context;
+        public ForumRepository(ApplicationDbContext appDbContext)
         {
-            var forumPosts;
-        }*/
+            context = appDbContext;
+        }
+        List<ForumPost> IForumRepository.GetAllForumPosts()
+        {
+            var forumPosts = context.ForumPosts
+                .Include(forumPost => forumPost.ForumUser)
+                .ToList();
+            return forumPosts;
+        }
+        ForumPost IForumRepository.GetForumPostById(int id)
+        {
+            throw new NotImplementedException();
+        }
+        int IForumRepository.StoreForumPost(ForumPost model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
