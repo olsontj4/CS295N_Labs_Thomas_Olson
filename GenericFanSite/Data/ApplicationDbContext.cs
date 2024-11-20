@@ -9,7 +9,6 @@ namespace GenericFanSite.Data
         public ApplicationDbContext(
            DbContextOptions<ApplicationDbContext> options) : base(options) { }
         // one DbSet for each domain model class
-        public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<ForumPost> ForumPosts { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
     }
