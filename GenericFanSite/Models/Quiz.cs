@@ -19,10 +19,6 @@
         {
             return (q.UserA == q.A);
         }
-        /*public override string ToString()
-        {
-            return base.ToString();
-        }*/
         //TODO: Figure out how to write to console in unit tests.
     }
 }

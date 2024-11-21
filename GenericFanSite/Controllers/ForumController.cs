@@ -65,7 +65,6 @@ namespace GenericFanSite.Controllers
                 }
                 return View(data);
             }
-            //return View("Index", data);
             return RedirectToAction("Index");
         }
     }
