@@ -19,7 +19,6 @@ namespace GenericFanSite.Controllers
         }
         public IActionResult Index()
         {
-            //ForumPost model = new ForumPost();
             List<ForumPost> forumPosts = context.ForumPosts
                 .Include(forumPost => forumPost.ForumUser)
                 .ToList();
@@ -40,9 +39,32 @@ namespace GenericFanSite.Controllers
             }
             catch (Exception ex)
             {
+                if (data.ForumTitle == null)
+                {
+                    ViewBag.RedText = "Please add a title.";
+                }
+                else if (data.ForumDescription == null)
+                {
+                    ViewBag.RedText = "Please add a description.";
+                }
+                else if (data.ForumText == null)
+                {
+                    ViewBag.RedText = "Please write a story.";
+                }
+                else if (data.ForumYear == null)
+                {
+                    ViewBag.RedText = "Please enter a year.";
+                }
+                else if (data.ForumUser == null)
+                {
+                    ViewBag.RedText = "Please enter your name.";
+                }
+                else
+                {
+                    ViewBag.RedText = "An unknown error has occured.";
+                }
                 return View(data);
             }
-            //return View("Index", data);
             return RedirectToAction("Index");
         }
     }

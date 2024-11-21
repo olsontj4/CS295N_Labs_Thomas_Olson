@@ -26,7 +26,7 @@
                 <br />
                 <label class="form-label" for="name">Name:</label>
                 <input class="form-control" id="name" type="text" name="ForumUser.Name" value="" />
-                <p class="text-danger">One or more fields missing.</p><!--Text if something goes wrong.-->
+                <p class="text-danger">@ViewBag.RedText</p><!--Text if something goes wrong.-->
                 <button class="btn btn-outline-light" type="submit">Submit</button>
             }
             else
