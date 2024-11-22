@@ -2,10 +2,10 @@ using GenericFanSite.Models;
 
 namespace TestProject1
 {
-    public class UnitTest1
+    public class QuizTests
     {
         Quiz quiz = new Quiz();
-        public UnitTest1()
+        public QuizTests()
         {
             //Arrange
             Question q1 = new Question() { Q = "What did Thomas eat for breakfast?", A = "Cereal", UserA = "Cereal" };
