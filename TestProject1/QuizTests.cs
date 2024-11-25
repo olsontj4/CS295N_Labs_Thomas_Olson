@@ -1,6 +1,6 @@
 using GenericFanSite.Models;
 
-namespace TestProject1
+namespace FanSiteTests
 {
     public class QuizTests
     {

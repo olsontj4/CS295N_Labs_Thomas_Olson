@@ -13,7 +13,7 @@ namespace GenericFanSite.Controllers
 {
     public class ForumController : Controller
     {
-        IForumRepository repo;
+        IForumRepository repo; //Not sure if this should be private or not.
         public ForumController(IForumRepository r)
         {
             repo = r;
@@ -30,6 +30,10 @@ namespace GenericFanSite.Controllers
         [HttpPost]
         public IActionResult ForumPostForm(ForumPost data)
         {
+            /*if (!ModelState.IsValid) //TODO: Different validation.
+            {
+
+            }*/
             try
             {
                 if (repo.StoreForumPost(data) > 0)

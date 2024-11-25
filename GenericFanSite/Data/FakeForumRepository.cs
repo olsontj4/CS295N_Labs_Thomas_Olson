@@ -7,7 +7,7 @@ namespace GenericFanSite.Data
         private List<ForumPost> forumPosts = new List<ForumPost>();
         List<ForumPost> IForumRepository.GetAllForumPosts()
         {
-            throw new NotImplementedException();
+            return forumPosts;
         }
         public ForumPost GetForumPostById(int id)
         {
