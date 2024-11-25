@@ -19,11 +19,18 @@ namespace GenericFanSite.Data
         }
         ForumPost IForumRepository.GetForumPostById(int id)
         {
-            throw new NotImplementedException();
+            var review = context.ForumPosts
+                .Include(forumPost => forumPost.ForumUser) // returns AppUser object
+                .Where(forumPost => forumPost.ForumPostId == id)
+                .SingleOrDefault();
+            return review;
         }
-        int IForumRepository.StoreForumPost(ForumPost model)
+        int IForumRepository.StoreForumPost(ForumPost data)
         {
-            throw new NotImplementedException();
+            data.ForumDate = DateTime.Now;
+            context.ForumPosts.Add(data);
+            return context.SaveChanges();
+            // returns a positive value if succussful
         }
     }
 }

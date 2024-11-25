@@ -9,13 +9,21 @@ namespace GenericFanSite.Data
         {
             throw new NotImplementedException();
         }
-        ForumPost IForumRepository.GetForumPostById(int id)
+        public ForumPost GetForumPostById(int id)
         {
-            throw new NotImplementedException();
+            ForumPost forumPost = forumPosts.Find(f => f.ForumPostId == id);
+            return forumPost;
         }
         int IForumRepository.StoreForumPost(ForumPost model)
         {
-            throw new NotImplementedException();
+            int status = 0;
+            if (model != null)
+            {
+                model.ForumPostId = forumPosts.Count + 1;
+                forumPosts.Add(model);
+                status = 1;
+            }
+            return status;
         }
     }
 }

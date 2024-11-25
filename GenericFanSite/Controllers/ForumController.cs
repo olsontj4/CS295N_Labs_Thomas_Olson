@@ -7,21 +7,20 @@ using GenericFanSite.Data;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GenericFanSite.Controllers
 {
     public class ForumController : Controller
     {
-        ApplicationDbContext context;
-        public ForumController(ApplicationDbContext c)
+        IForumRepository repo;
+        public ForumController(IForumRepository r)
         {
-            context = c;
+            repo = r;
         }
         public IActionResult Index()
         {
-            List<ForumPost> forumPosts = context.ForumPosts
-                .Include(forumPost => forumPost.ForumUser)
-                .ToList();
+            var forumPosts = repo.GetAllForumPosts();
             return View(forumPosts);
         }
         public IActionResult ForumPostForm()
@@ -33,11 +32,17 @@ namespace GenericFanSite.Controllers
         {
             try
             {
-                data.ForumDate = DateTime.Now;
-                context.ForumPosts.Add(data);
-                context.SaveChanges();
+                if (repo.StoreForumPost(data) > 0)
+                {
+                    return RedirectToAction("Index", new { forumPostId = data.ForumPostId });// Not sure what I'm using the ID for.
+                }
+                else
+                {
+                    ViewBag.RedText = "There was a really bad error saving the forum post.";
+                    return View();
+                }
             }
-            catch (Exception ex)
+            catch
             {
                 if (data.ForumTitle == null)
                 {
@@ -65,7 +70,6 @@ namespace GenericFanSite.Controllers
                 }
                 return View(data);
             }
-            return RedirectToAction("Index");
         }
     }
 }
