@@ -21,6 +21,7 @@ namespace FanSiteTests
             this.output = output;
             controller = new ForumController(repo);
         }
+        
         [Fact]
         public void ForumPostTestSuccess()
         {
