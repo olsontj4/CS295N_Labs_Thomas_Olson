@@ -2,7 +2,7 @@
 
 namespace GenericFanSite.Data
 {
-    public interface IForumRepository
+    public interface IForumRepo
     {
         public List<ForumPost> GetAllForumPosts();  // Returns all forum post objects
         public ForumPost GetForumPostById(int id); // Returns a model object

@@ -2,10 +2,10 @@
 
 namespace GenericFanSite.Data
 {
-    public class FakeForumRepository : IForumRepository
+    public class FakeForumRepo : IForumRepo
     {
         private List<ForumPost> forumPosts = new List<ForumPost>();
-        List<ForumPost> IForumRepository.GetAllForumPosts()
+        List<ForumPost> IForumRepo.GetAllForumPosts()
         {
             return forumPosts;
         }
@@ -14,11 +14,12 @@ namespace GenericFanSite.Data
             ForumPost forumPost = forumPosts.Find(f => f.ForumPostId == id);
             return forumPost;
         }
-        int IForumRepository.StoreForumPost(ForumPost model)
+        int IForumRepo.StoreForumPost(ForumPost model)
         {
             int status = 0;
-            if (model != null)
+            if (model != null && model.User != null)
             {
+                model.Date = DateTime.Now;
                 model.ForumPostId = forumPosts.Count + 1;
                 forumPosts.Add(model);
                 status = 1;
