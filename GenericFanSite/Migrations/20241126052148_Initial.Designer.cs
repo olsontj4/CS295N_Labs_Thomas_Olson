@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GenericFanSite.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241120011938_Initial")]
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20241126052148_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,9 @@ namespace GenericFanSite.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("varchar(25)");
 
                     b.HasKey("AppUserId");
 
@@ -41,44 +43,47 @@ namespace GenericFanSite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ForumDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("ForumDescription")
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
-                    b.Property<string>("ForumText")
+                    b.Property<string>("Story")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(1000)
+                        .HasColumnType("varchar(1000)");
 
-                    b.Property<string>("ForumTitle")
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
 
-                    b.Property<int>("ForumUserAppUserId")
+                    b.Property<int>("UserAppUserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ForumYear")
+                    b.Property<int?>("Year")
                         .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("ForumPostId");
 
-                    b.HasIndex("ForumUserAppUserId");
+                    b.HasIndex("UserAppUserId");
 
                     b.ToTable("ForumPosts");
                 });
 
             modelBuilder.Entity("GenericFanSite.Models.ForumPost", b =>
                 {
-                    b.HasOne("GenericFanSite.Models.AppUser", "ForumUser")
+                    b.HasOne("GenericFanSite.Models.AppUser", "User")
                         .WithMany()
-                        .HasForeignKey("ForumUserAppUserId")
+                        .HasForeignKey("UserAppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ForumUser");
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

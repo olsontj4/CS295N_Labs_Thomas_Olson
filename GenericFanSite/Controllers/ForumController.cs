@@ -8,17 +8,23 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using Microsoft.AspNetCore.Components.Forms;
+
+using System.Linq;
 
 namespace GenericFanSite.Controllers
 {
     public class ForumController : Controller
     {
-        IForumRepository repo; //Not sure if this should be private or not.
-        public ForumController(IForumRepository r)
+        IForumRepo repo; //Not sure if this should be private or not.
+        public ForumController(IForumRepo r)
         {
             repo = r;
         }
-        public IActionResult Index()
+        public IActionResult Index(ForumPost forumPost)
         {
             var forumPosts = repo.GetAllForumPosts();
             return View(forumPosts);
@@ -30,50 +36,29 @@ namespace GenericFanSite.Controllers
         [HttpPost]
         public IActionResult ForumPostForm(ForumPost data)
         {
-            /*if (!ModelState.IsValid) //TODO: Different validation.
+            if (ModelState.IsValid)
             {
-
-            }*/
-            try
-            {
-                if (repo.StoreForumPost(data) > 0)
+                try
                 {
-                    return RedirectToAction("Index", new { forumPostId = data.ForumPostId });// Not sure what I'm using the ID for.
+                    if (data != null && repo.StoreForumPost(data) > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ViewBag.RedText = "There was a really bad error saving the forum post.";
+                        return View();
+                    }
                 }
-                else
-                {
-                    ViewBag.RedText = "There was a really bad error saving the forum post.";
-                    return View();
-                }
-            }
-            catch
-            {
-                if (data.ForumTitle == null)
-                {
-                    ViewBag.RedText = "Please add a title.";
-                }
-                else if (data.ForumDescription == null)
-                {
-                    ViewBag.RedText = "Please add a description.";
-                }
-                else if (data.ForumText == null)
-                {
-                    ViewBag.RedText = "Please write a story.";
-                }
-                else if (data.ForumYear == null)
-                {
-                    ViewBag.RedText = "Please enter a year.";
-                }
-                else if (data.ForumUser == null)
-                {
-                    ViewBag.RedText = "Please enter your name.";
-                }
-                else
+                catch
                 {
                     ViewBag.RedText = "An unknown error has occured.";
+                    return View(data);
                 }
-                return View(data);
             }
+            var allErrors = ModelState.Where(e => e.Value.Errors.Count > 0).ToList();
+            ViewBag.RedText = allErrors[0].Value.Errors[0].ErrorMessage.ToString();  //I am doing a bad.  Error messages work though, so I don't care.  Thank you, Stack Overflow.
+            return View(data);
         }
     }
 }

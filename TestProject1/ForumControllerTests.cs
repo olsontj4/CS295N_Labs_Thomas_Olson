@@ -14,7 +14,7 @@ namespace FanSiteTests
     public class ForumControllerTests
     {
         private readonly ITestOutputHelper output;  // Console logging.
-        IForumRepository repo = new FakeForumRepository();
+        IForumRepo repo = new FakeForumRepo();
         ForumController controller;
         public ForumControllerTests(ITestOutputHelper output)
         {
@@ -27,7 +27,11 @@ namespace FanSiteTests
             // arrange
             // Done in the constructor
             // act
-            var result = controller.ForumPostForm(new ForumPost());
+            AppUser user1 = new AppUser();
+            user1.Name = "Test";
+            ForumPost forumPost = new ForumPost();
+            forumPost.User = user1;
+            var result = controller.ForumPostForm(forumPost);
             // assert
             // Check to see if I got a RedirectToActionResult
             output.WriteLine(result.ToString());
@@ -46,13 +50,16 @@ namespace FanSiteTests
             Assert.True(result.GetType() == typeof(ViewResult));
         }
         [Fact]
-        public void ForumPostTestOverloadedConstructor()
+        public void ForumPostTestValidation()
         {
-            var forumPost = new ForumPost();
-            forumPost.ForumTitle = "Title";
+            AppUser user1 = new AppUser();
+            user1.Name = "Test";
+            ForumPost forumPost = new ForumPost();
+            forumPost.ForumPostId = 0;
+            forumPost.Title = "Titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+            forumPost.User = user1;
+
             var result = controller.ForumPostForm(forumPost);
-            // assert
-            // Check to see if I got a RedirectToActionResult
             output.WriteLine(result.ToString());
             Assert.True(result.GetType() == typeof(ViewResult));
         }

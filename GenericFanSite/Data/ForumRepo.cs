@@ -3,31 +3,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GenericFanSite.Data
 {
-    public class ForumRepository : IForumRepository
+    public class ForumRepo : IForumRepo
     {
-        private ApplicationDbContext context;
-        public ForumRepository(ApplicationDbContext appDbContext)
+        private AppDbContext context;
+        public ForumRepo(AppDbContext appDbContext)
         {
             context = appDbContext;
         }
-        List<ForumPost> IForumRepository.GetAllForumPosts()
+        List<ForumPost> IForumRepo.GetAllForumPosts()
         {
             var forumPosts = context.ForumPosts
-                .Include(forumPost => forumPost.ForumUser)
+                .Include(forumPost => forumPost.User)
                 .ToList();
             return forumPosts;
         }
-        ForumPost IForumRepository.GetForumPostById(int id)
+        ForumPost IForumRepo.GetForumPostById(int id)
         {
             var review = context.ForumPosts
-                .Include(forumPost => forumPost.ForumUser) // returns AppUser object
+                .Include(forumPost => forumPost.User) // returns AppUser object
                 .Where(forumPost => forumPost.ForumPostId == id)
                 .SingleOrDefault();
             return review;
         }
-        int IForumRepository.StoreForumPost(ForumPost data)
+        int IForumRepo.StoreForumPost(ForumPost data)
         {
-            data.ForumDate = DateTime.Now;
+            data.Date = DateTime.Now;
             context.ForumPosts.Add(data);
             return context.SaveChanges();
             // returns a positive value if succussful
