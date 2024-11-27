@@ -14,28 +14,30 @@
     <a class="btn btn-outline-light" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
 </article>
 <article class="container-fluid mt-3">
-    <div class="mt-md-3 text-center row d-flex justify-content-center">
-        @if (Model.Count != 0)
+    @if (Model.Count != 0)
+    {
+        foreach (ForumPost forumPost in Model)
         {
-            foreach (ForumPost forumPost in Model)
-            {
+            <div class="mt-md-3 text-center row d-flex justify-content-center">
                 <div class="bg-dark-subtle col col-md-8 mb-3"><!--Forum post should only stretch to full width on smaller screens.-->
-                    <h3>@forumPost.ForumTitle</h3>
-                    <p>@forumPost.ForumDescription</p>
-                    <p>Year this story took place: @forumPost.ForumYear</p>
+                    <h3>@forumPost.Title</h3>
+                    <p>@forumPost.Description</p>
+                    <p>Year this story took place: @forumPost.Year</p>
                     <hr />
-                    <p>@forumPost.ForumText</p>
+                    <p>@forumPost.Story</p>
                     <hr />
-                    <p class="text-start float-start">Author: @forumPost.ForumUser.Name &nbsp;</p>
-                    <p class="text-sm-start text-start float-start float-sm-end">Posted on: @forumPost.ForumDate.Date.ToShortDateString()</p><!--Text should float to left and right sides except on small screens.-->
+                    <p class="text-start float-start">Author: @forumPost.User.Name &nbsp;</p>
+                    <p class="text-sm-start text-start float-start float-sm-end">Posted on: @forumPost.Date.Date.ToShortDateString()</p><!--Text should float to left and right sides except on small screens.-->
                 </div>
-            }
+            </div>
         }
-        else
-        {
+    }
+    else
+    {
+        <div class="mt-md-3 text-center row d-flex justify-content-center">
             <p class="text-danger">There are no forum posts.</p>
-        }
-    </div>
+        </div>
+    }
     <!--div class="spinner-border" role="status">
         <span class="visually-hidden"></span>
     </div-->

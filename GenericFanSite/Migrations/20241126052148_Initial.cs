@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -19,7 +18,7 @@ namespace GenericFanSite.Migrations
                 {
                     AppUserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: true)
+                    Name = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -34,22 +33,22 @@ namespace GenericFanSite.Migrations
                 {
                     ForumPostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ForumTitle = table.Column<string>(type: "longtext", nullable: false)
+                    Title = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ForumDescription = table.Column<string>(type: "longtext", nullable: false)
+                    Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ForumYear = table.Column<int>(type: "int", nullable: false),
-                    ForumText = table.Column<string>(type: "longtext", nullable: false)
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    Story = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ForumUserAppUserId = table.Column<int>(type: "int", nullable: false),
-                    ForumDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    UserAppUserId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ForumPosts", x => x.ForumPostId);
                     table.ForeignKey(
-                        name: "FK_ForumPosts_AppUsers_ForumUserAppUserId",
-                        column: x => x.ForumUserAppUserId,
+                        name: "FK_ForumPosts_AppUsers_UserAppUserId",
+                        column: x => x.UserAppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "AppUserId",
                         onDelete: ReferentialAction.Cascade);
@@ -57,9 +56,9 @@ namespace GenericFanSite.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ForumPosts_ForumUserAppUserId",
+                name: "IX_ForumPosts_UserAppUserId",
                 table: "ForumPosts",
-                column: "ForumUserAppUserId");
+                column: "UserAppUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

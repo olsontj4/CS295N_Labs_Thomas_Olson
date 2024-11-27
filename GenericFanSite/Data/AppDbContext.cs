@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GenericFanSite.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         // constructor just calls the base class constructor
-        public ApplicationDbContext(
-           DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public AppDbContext(
+           DbContextOptions<AppDbContext> options) : base(options) { }
         // one DbSet for each domain model class
         public DbSet<ForumPost> ForumPosts { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
