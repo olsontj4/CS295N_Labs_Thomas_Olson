@@ -1,6 +1,4 @@
-﻿using System.Runtime.Intrinsics.X86;
-using System;
-using GenericFanSite.Models;
+﻿using GenericFanSite.Models;
 
 namespace GenericFanSite.Data
 {

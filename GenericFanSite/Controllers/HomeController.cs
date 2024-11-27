@@ -1,7 +1,6 @@
 ﻿using GenericFanSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Text.Json.Nodes;
 
 namespace GenericFanSite.Controllers
 {

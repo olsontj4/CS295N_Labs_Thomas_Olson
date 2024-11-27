@@ -1,19 +1,6 @@
 ﻿using GenericFanSite.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-
 using GenericFanSite.Data;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Security.Cryptography.X509Certificates;
-using System.Collections.Generic;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.AspNetCore.Components.Forms;
-
-using System.Linq;
 
 namespace GenericFanSite.Controllers
 {
