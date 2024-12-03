@@ -11,7 +11,7 @@ namespace GenericFanSite.Controllers
         {
             repo = r;
         }
-        public IActionResult Index(String? filter, int results)
+        public IActionResult Index(String? name, DateTime? date, String? filter, int results)
         {
             if (results == 0)  //Default for number of forum posts displayed is 3.
             {
@@ -23,12 +23,22 @@ namespace GenericFanSite.Controllers
             }
             if (filter == "Name")
             {
-                var forumPosts = repo.GetAllForumPosts().OrderBy(p => p.User.Name).Take(results).ToList();  //Using .Take() to not display every row in the database table.
+                var forumPosts = repo.GetAllForumPosts()
+                    .Where(p => name == null || p.User.Name == name)
+                    .Where(p => date == null || p.Date == date)
+                    .OrderBy(p => p.User.Name)
+                    .Take(results)  //Using .Take() to not display every row in the database table.
+                    .ToList();
                 return View(forumPosts);
             }
             else
             {
-                var forumPosts = repo.GetAllForumPosts().OrderByDescending(p => p.Date).Take(results).ToList();
+                var forumPosts = repo.GetAllForumPosts()
+                    .Where(p => name == null || p.User.Name == name)
+                    .Where(p => date == null || p.Date == date)
+                    .OrderByDescending(p => p.Date)
+                    .Take(results)
+                    .ToList();
                 return View(forumPosts);
             }
         }

@@ -11,13 +11,24 @@
 </section>
 <hr />
 <article class="text-center">
-    <a class="btn btn-outline-light" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
+    <a class="btn btn-outline-light mb-3" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
 </article>
-<div>
-    <select>
-        <option value="Date">Date</option>
-        <option value="Name">Name</option>
-    </select>
+<div class="container col col-md-6">
+    <form method="post" class="">
+        <select class="form-select" name="filter">
+            <option hidden>Filter by:</option>
+            <option value="Date">Date</option>
+            <option value="Name">Name</option>
+        </select>
+        <select class="form-select" name="results">
+            <option hidden>Results:</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="-1">All</option>
+        </select>
+        <button class="btn btn-outline-light" type="submit">Filter</button>
+    </form>
 </div>
 <article class="container-fluid mt-3">
     @if (Model.Count != 0)
