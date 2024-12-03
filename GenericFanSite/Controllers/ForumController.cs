@@ -13,13 +13,14 @@ namespace GenericFanSite.Controllers
         }
         public IActionResult Index(ForumSearch data)
         {
-            if (data.Results == 0)  //Default for number of forum posts displayed is 3.
+            int countFromResults = data.Results;
+            if (data.Results == 0)  //Default for number of forum posts displayed is 5.
             {
-                data.Results = 3;
+                countFromResults = 5;
             }
             else if (data.Results == -1)  //Display all.
             {
-                data.Results = repo.GetAllForumPosts().ToList().Count;
+                countFromResults = repo.GetAllForumPosts().ToList().Count;
             }
             if (data.Filter == "Name")
             {
@@ -27,7 +28,7 @@ namespace GenericFanSite.Controllers
                     .Where(p => data.Name == null || p.User.Name == data.Name)
                     .Where(p => data.Date == null || p.Date == data.Date)
                     .OrderBy(p => p.User.Name)
-                    .Take(data.Results)  //Using .Take() to not display every row in the database table.
+                    .Take(countFromResults)  //Using .Take() to not display every row in the database table.
                     .ToList();
                 data.ForumPosts = forumPosts;
                 return View(data);
@@ -38,7 +39,7 @@ namespace GenericFanSite.Controllers
                     .Where(p => data.Name == null || p.User.Name == data.Name)
                     .Where(p => data.Date == null || p.Date == data.Date)
                     .OrderByDescending(p => p.Date)
-                    .Take(data.Results)
+                    .Take(countFromResults)
                     .ToList();
                 data.ForumPosts = forumPosts;
                 return View(data);
