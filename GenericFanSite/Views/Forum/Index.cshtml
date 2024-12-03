@@ -13,6 +13,12 @@
 <article class="text-center">
     <a class="btn btn-outline-light" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
 </article>
+<div>
+    <select>
+        <option value="Date">Date</option>
+        <option value="Name">Name</option>
+    </select>
+</div>
 <article class="container-fluid mt-3">
     @if (Model.Count != 0)
     {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenericFanSite.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241126052148_Initial")]
+    [Migration("20241203191822_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

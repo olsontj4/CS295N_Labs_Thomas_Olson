@@ -11,10 +11,26 @@ namespace GenericFanSite.Controllers
         {
             repo = r;
         }
-        public IActionResult Index(ForumPost forumPost)
+        public IActionResult Index(String? filter, int results)
         {
-            var forumPosts = repo.GetAllForumPosts();
-            return View(forumPosts);
+            if (results == 0)  //Default for number of forum posts displayed is 3.
+            {
+                results = 3;
+            }
+            else if (results == -1)  //Display all.
+            {
+                results = repo.GetAllForumPosts().ToList().Count();
+            }
+            if (filter == "Name")
+            {
+                var forumPosts = repo.GetAllForumPosts().OrderBy(p => p.User.Name).Take(results).ToList();  //Using .Take() to not display every row in the database table.
+                return View(forumPosts);
+            }
+            else
+            {
+                var forumPosts = repo.GetAllForumPosts().OrderByDescending(p => p.Date).Take(results).ToList();
+                return View(forumPosts);
+            }
         }
         public IActionResult ForumPostForm()
         {
