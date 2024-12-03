@@ -33,6 +33,17 @@ namespace GenericFanSite.Controllers
                 data.ForumPosts = forumPosts;
                 return View(data);
             }
+            else if (data.Filter == "Date (Oldest)")
+            {
+                var forumPosts = repo.GetAllForumPosts()
+                    .Where(p => data.Name == null || p.User.Name == data.Name)
+                    .Where(p => data.Date == null || p.Date == data.Date)
+                    .OrderBy(p => p.Date)
+                    .Take(countFromResults)
+                    .ToList();
+                data.ForumPosts = forumPosts;
+                return View(data);
+            }
             else
             {
                 var forumPosts = repo.GetAllForumPosts()

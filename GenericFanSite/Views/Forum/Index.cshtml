@@ -21,11 +21,19 @@
             <option hidden>Sort by:</option>
             @if (Model.Filter == "Date")
             {
-                <option value="Date" selected>Date</option>
+                <option value="Date" selected>Date (Newest)</option>
             }
             else
             {
-                <option value="Date">Date</option>
+                <option value="Date">Date (Newest)</option>
+            }
+            @if (Model.Filter == "Date (Oldest)")
+            {
+                <option value="Date (Oldest)" selected>Date (Oldest)</option>
+            }
+            else
+            {
+                <option value="Date (Oldest)">Date (Oldest)</option>
             }
             @if (Model.Filter == "Name")
             {
