@@ -11,35 +11,37 @@ namespace GenericFanSite.Controllers
         {
             repo = r;
         }
-        public IActionResult Index(String? name, DateTime? date, String? filter, int results)
+        public IActionResult Index(ForumSearch data)
         {
-            if (results == 0)  //Default for number of forum posts displayed is 3.
+            if (data.Results == 0)  //Default for number of forum posts displayed is 3.
             {
-                results = 3;
+                data.Results = 3;
             }
-            else if (results == -1)  //Display all.
+            else if (data.Results == -1)  //Display all.
             {
-                results = repo.GetAllForumPosts().ToList().Count();
+                data.Results = repo.GetAllForumPosts().ToList().Count;
             }
-            if (filter == "Name")
+            if (data.Filter == "Name")
             {
                 var forumPosts = repo.GetAllForumPosts()
-                    .Where(p => name == null || p.User.Name == name)
-                    .Where(p => date == null || p.Date == date)
+                    .Where(p => data.Name == null || p.User.Name == data.Name)
+                    .Where(p => data.Date == null || p.Date == data.Date)
                     .OrderBy(p => p.User.Name)
-                    .Take(results)  //Using .Take() to not display every row in the database table.
+                    .Take(data.Results)  //Using .Take() to not display every row in the database table.
                     .ToList();
-                return View(forumPosts);
+                data.ForumPosts = forumPosts;
+                return View(data);
             }
             else
             {
                 var forumPosts = repo.GetAllForumPosts()
-                    .Where(p => name == null || p.User.Name == name)
-                    .Where(p => date == null || p.Date == date)
+                    .Where(p => data.Name == null || p.User.Name == data.Name)
+                    .Where(p => data.Date == null || p.Date == data.Date)
                     .OrderByDescending(p => p.Date)
-                    .Take(results)
+                    .Take(data.Results)
                     .ToList();
-                return View(forumPosts);
+                data.ForumPosts = forumPosts;
+                return View(data);
             }
         }
         public IActionResult ForumPostForm()
