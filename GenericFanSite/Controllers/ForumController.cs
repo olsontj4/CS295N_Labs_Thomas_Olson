@@ -11,6 +11,7 @@ namespace GenericFanSite.Controllers
         {
             repo = r;
         }
+        [HttpGet]
         public IActionResult Index(ForumSearch data)
         {
             int countFromResults = data.Results;

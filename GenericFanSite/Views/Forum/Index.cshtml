@@ -14,7 +14,7 @@
     <a class="btn btn-outline-light mb-3" asp-area="" asp-controller="Forum" asp-action="ForumPostForm">Create a forum post</a>
 </article>
 <div class="container col col-md-6">
-    <form method="post" class="">
+    <form method="get" class="">
         <input class="form-control" name="name" placeholder="Name:" value="@Model.Name"/>
         <input class="form-control" type="date" name="date" value="" />
         <select class="form-select" name="filter">
