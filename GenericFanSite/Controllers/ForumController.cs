@@ -11,10 +11,51 @@ namespace GenericFanSite.Controllers
         {
             repo = r;
         }
-        public IActionResult Index(ForumPost forumPost)
+        [HttpGet]
+        public IActionResult Index(ForumSearch data)
         {
-            var forumPosts = repo.GetAllForumPosts();
-            return View(forumPosts);
+            int countFromResults = data.Results;
+            if (data.Results == 0)  //Default for number of forum posts displayed is 5.
+            {
+                countFromResults = 5;
+            }
+            else if (data.Results == -1)  //Display all.
+            {
+                countFromResults = repo.GetAllForumPosts().ToList().Count;
+            }
+            if (data.Filter == "Name")
+            {
+                var forumPosts = repo.GetAllForumPosts()
+                    .Where(p => data.Name == null || p.User.Name == data.Name)
+                    .Where(p => data.Date == null || p.Date == data.Date)
+                    .OrderBy(p => p.User.Name)
+                    .Take(countFromResults)  //Using .Take() to not display every row in the database table.
+                    .ToList();
+                data.ForumPosts = forumPosts;
+                return View(data);
+            }
+            else if (data.Filter == "Date (Oldest)")
+            {
+                var forumPosts = repo.GetAllForumPosts()
+                    .Where(p => data.Name == null || p.User.Name == data.Name)
+                    .Where(p => data.Date == null || p.Date == data.Date)
+                    .OrderBy(p => p.Date)
+                    .Take(countFromResults)
+                    .ToList();
+                data.ForumPosts = forumPosts;
+                return View(data);
+            }
+            else
+            {
+                var forumPosts = repo.GetAllForumPosts()
+                    .Where(p => data.Name == null || p.User.Name == data.Name)
+                    .Where(p => data.Date == null || p.Date == data.Date)
+                    .OrderByDescending(p => p.Date)
+                    .Take(countFromResults)
+                    .ToList();
+                data.ForumPosts = forumPosts;
+                return View(data);
+            }
         }
         public IActionResult ForumPostForm()
         {
